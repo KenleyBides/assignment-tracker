@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { AppContext } from "@/context/AppContext";
+import { AppContext } from "../../context/AppContext";
 
 export default function HomePage() {
   const context = useContext(AppContext);
@@ -9,13 +9,13 @@ export default function HomePage() {
   if (!context) return <div>Loading...</div>;
 
   const { user, assignments } = context;
-  const pending = assignments.filter(a => !a.completed).length;
+  const pendingCount = assignments.filter(a => !a.completed).length;
 
   return (
-    <div>
-      <h1>Welcome, {user.name || "Student"}!</h1>
-      <p>Program: {user.program || "Not set"}</p>
-      <p>You have {pending} assignments left</p>
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-4">Welcome, {user.name || "Student"}!</h1>
+      <p className="mb-2">Program: {user.program || "Not set"}</p>
+      <p>You have {pendingCount} assignments left</p>
     </div>
   );
 }

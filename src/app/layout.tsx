@@ -1,5 +1,5 @@
-// src/app/layout.tsx
-import '../styles/globals.css';
+"use client";
+import '../app/globals.css';
 import Navbar from '../components/Navbar';
 import { AppProvider } from '../context/AppContext';
 
