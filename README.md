@@ -51,3 +51,5 @@ Project Overview
 3. The History page a list of completed assignments to help the user keep track of what they've completed.
 
 4. The Settings page contains another form like the Assignments page but it connects to the Home page. The form asks for the user's name and program and when inputed, it will replace the texts in the Home page ("Welcome, name. Program: program).
+
+Live server: https://assignment-tracker-murex.vercel.app/
