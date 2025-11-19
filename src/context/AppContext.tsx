@@ -1,10 +1,12 @@
-// src/context/AppContext.tsx
-import { createContext, useState, ReactNode } from "react";
+"use client";
+
+import { createContext, useContext, useState, ReactNode } from "react";
 import { Assignment, User } from "../types";
 
 interface AppContextType {
   user: User;
   setUser: (user: User) => void;
+  updateUser: (data: Partial<User>) => void;
   assignments: Assignment[];
   addAssignment: (assignment: Assignment) => void;
   completeAssignment: (id: number) => void;
@@ -20,6 +22,10 @@ interface AppProviderProps {
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [user, setUser] = useState<User>({ name: "", program: "" });
   const [assignments, setAssignments] = useState<Assignment[]>([]);
+
+  const updateUser = (data: Partial<User>) => {
+    setUser((prev) => ({ ...prev, ...data }));
+  };
 
   const addAssignment = (assignment: Assignment) => {
     setAssignments([...assignments, assignment]);
@@ -39,9 +45,24 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   return (
     <AppContext.Provider
-      value={{ user, setUser, assignments, addAssignment, completeAssignment, deleteAssignment }}
+      value={{
+        user,
+        setUser,
+        updateUser,
+        assignments,
+        addAssignment,
+        completeAssignment,
+        deleteAssignment,
+      }}
     >
       {children}
     </AppContext.Provider>
   );
+};
+
+export const useAppContext = () => {
+  const context = useContext(AppContext);
+  if (!context)
+    throw new Error("useAppContext must be used within AppProvider");
+  return context;
 };
