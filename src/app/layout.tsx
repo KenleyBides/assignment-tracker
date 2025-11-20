@@ -1,4 +1,3 @@
-// src/app/layout.tsx
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import { AppProvider } from "../context/AppContext"; 
@@ -13,7 +12,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="bg-black text-white min-h-screen flex flex-col">
 
-        {/* Wrap the entire app inside AppProvider */}
         <AppProvider>
           <Navbar />
 
