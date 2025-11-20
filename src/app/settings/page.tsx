@@ -2,20 +2,27 @@
 
 import { useAppContext } from "../../context/AppContext";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
   const { user, updateUser } = useAppContext();
+  const router = useRouter();
 
   const [name, setName] = useState(user.name);
   const [program, setProgram] = useState(user.program);
+  const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
     updateUser({ name, program });
+    setSaved(true);
+    setTimeout(() => {
+      router.push("/home"); // redirection
+    }, 1000);
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto min-h-screen bg-black text-white">
-      <h1 className="text-2xl font-semibold mb-6">Settings</h1>
+    <div className="p-6 max-w-lg mx-auto min-h-screen bg-black text-white flex flex-col justify-center">
+      <h1 className="text-2xl font-semibold mb-6 text-center">Settings</h1>
 
       <div className="flex flex-col gap-4">
         {/* Name */}
@@ -47,6 +54,13 @@ export default function SettingsPage() {
         >
           Save
         </button>
+
+        {/* Saved message */}
+        {saved && (
+          <p className="mt-2 text-green-400 font-medium text-center">
+            Saved!
+          </p>
+        )}
       </div>
     </div>
   );
